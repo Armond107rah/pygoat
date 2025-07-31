@@ -51,3 +51,9 @@ jobs:
        echo ${{ secrets.REPO_PWD }} | docker login -u ${{ secrets.REPO_USER }} --password-stdin
        docker scout quickview 
        docker scout cves
+   - name: Upload Artifact
+     uses: actions/upload-artifact@v4
+     if: always()
+     with:
+      name: docker-scout-findings
+      path: bandit-report.json
